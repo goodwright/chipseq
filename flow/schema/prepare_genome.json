@@ -1,0 +1,65 @@
+{
+    "inputs": {
+        "file_options": {
+            "name": "File options",
+            "description": "Files needed to build the genome.",
+            "properties": {
+                "fasta": {
+                    "name": "FASTA",
+                    "type": "file",
+                    "pattern": "fasta|fa$",
+                    "genome_file": "fasta",
+                    "required": true,
+                    "description": "A raw genome FASTA file."
+                },
+                "gtf": {
+                    "name": "GTF",
+                    "type": "file",
+                    "pattern": "gtf",
+                    "genome_file": "gtf",
+                    "required": true,
+                    "description": "An annotation for the genome."
+                },
+                "save_reference": {
+                    "name": "Save Reference",
+                    "type": "hidden",
+                    "default": "true",
+                    "required": true,
+                    "description": "."
+                }
+            }
+        }
+    },
+    "outputs": [
+        {
+            "name": "Gene BED annotation",
+            "description": "An annotation of the genome's genes, generated from the GTF.",
+            "process": "GTF2BED",
+            "filetype": "bed"
+        },
+        {
+            "name": "WQA Index",
+            "description": "A genome index which BWA can align reads to.",
+            "process": "BWA_INDEX",
+            "filetype": ""
+        },
+        {
+            "name": "Bowtie Index",
+            "description": "A genome index which Bowtie can align reads to.",
+            "process": "BOWTIE_BUILD",
+            "filetype": ""
+        },
+        {
+            "name": "Chromap Index",
+            "description": "A genome index which Chromap can align reads to.",
+            "process": "CHROMAP_INDEX",
+            "filetype": ""
+        },
+        {
+            "name": "STAR Index",
+            "description": "A genome index which STAR can align reads to.",
+            "process": "STAR_GENOMEGENERATE",
+            "filetype": ""
+        }
+    ]
+}
