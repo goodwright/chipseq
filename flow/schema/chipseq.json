@@ -1,0 +1,98 @@
+{
+    "inputs": {
+        "sample_options": {
+            "name": "Sample options",
+            "description": "Parameters relating to the sample being analysed.",
+            "properties": {
+                "input": {
+                    "name": "Sample",
+                    "type": "sample",
+                    "pattern": "csv|xlsx",
+                    "required": true,
+                    "description": "The sample to process."
+                }
+            }
+        },
+        "genome_options": {
+            "name": "Genome options",
+            "description": "The genome being aligned to.",
+            "takes_genome": true,
+            "properties": {
+                "fasta": {
+                    "name": "FASTA",
+                    "type": "file",
+                    "pattern": "fasta|fa$",
+                    "required": true,
+                    "genome_file": "fasta",
+                    "description": "A raw genome FASTA file."
+                },
+                "gtf": {
+                    "name": "GTF",
+                    "type": "file",
+                    "pattern": "gtf",
+                    "required": true,
+                    "genome_file": "gtf",
+                    "description": "An annotation for the genome."
+                },
+                "gene_bed": {
+                    "name": "BED",
+                    "type": "file",
+                    "pattern": "bed",
+                    "required": false,
+                    "genome_output": {
+                        "process": "PREPARE_GENOME_BWA:GTF2BED",
+                        "filetype": "bed"
+                    },
+                    "description": "BED file containing gene intervals. This will be created from the GTF file if not specified."
+                },
+                "bwa_index": {
+                    "name": "BWA Index",
+                    "type": "file",
+                    "pattern": "",
+                    "required": false,
+                    "genome_output": {
+                        "process": "BWA_INDEX",
+                        "filetype": ""
+                    },
+                    "description": "A genome index built with BWA."
+                },
+                "bowtie_index": {
+                    "name": "Bowtie Index",
+                    "type": "file",
+                    "pattern": "",
+                    "required": false,
+                    "genome_output": {
+                        "process": "BOWTIE2_BUILD",
+                        "filetype": ""
+                    },
+                    "description": "A genome index built with Bowtie."
+                },
+                "chromap_index": {
+                    "name": "Chromap Index",
+                    "type": "file",
+                    "pattern": "",
+                    "required": false,
+                    "genome_output": {
+                        "process": "CHROMAP_INDEX",
+                        "filetype": "index"
+                    },
+                    "description": "A genome index built with Chromap."
+                },
+                "star_index": {
+                    "name": "STAR Index",
+                    "type": "file",
+                    "pattern": "",
+                    "required": false,
+                    "genome_output": {
+                        "process": "STAR_GENOMEGENERATE",
+                        "filetype": ""
+                    },
+                    "description": "A genome index built with STAR."
+                }
+            }
+        }
+    },
+    "outputs": [
+
+    ]
+}
