@@ -19,13 +19,6 @@
                     "genome_file": "gtf",
                     "required": true,
                     "description": "An annotation for the genome."
-                },
-                "save_reference": {
-                    "name": "Save Reference",
-                    "type": "hidden",
-                    "default": "true",
-                    "required": true,
-                    "description": "."
                 }
             }
         }
@@ -38,7 +31,7 @@
             "filetype": "bed"
         },
         {
-            "name": "WQA Index",
+            "name": "BWA Index",
             "description": "A genome index which BWA can align reads to.",
             "process": "BWA_INDEX",
             "filetype": ""
@@ -46,7 +39,7 @@
         {
             "name": "Bowtie Index",
             "description": "A genome index which Bowtie can align reads to.",
-            "process": "BOWTIE_BUILD",
+            "process": "BOWTIE2_BUILD",
             "filetype": ""
         },
         {
