@@ -27,7 +27,7 @@
         {
             "name": "Gene BED annotation",
             "description": "An annotation of the genome's genes, generated from the GTF.",
-            "process": "GTF2BED",
+            "process": "PREPARE_GENOME_BWA:GTF2BED",
             "filetype": "bed"
         },
         {
@@ -46,7 +46,7 @@
             "name": "Chromap Index",
             "description": "A genome index which Chromap can align reads to.",
             "process": "CHROMAP_INDEX",
-            "filetype": ""
+            "filetype": "index"
         },
         {
             "name": "STAR Index",
