@@ -10,6 +10,13 @@
                     "pattern": "csv|xlsx",
                     "required": true,
                     "description": "The sample to process."
+                },
+                "read_length": {
+                    "name": "Read Length",
+                    "type": "number",
+                    "default": "50",
+                    "required": true,
+                    "description": "Read length used to calculate MACS2 genome size for peak calling."
                 }
             }
         },
