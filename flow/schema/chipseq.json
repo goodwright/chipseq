@@ -104,8 +104,84 @@
                     "description": "A genome index built with STAR."
                 }
             }
-        }
-    },
+        },
+        "read_trimming_options": {
+            "name": "Read Trimming Settings",
+            "description": "Settings for read trimming.",
+            "properties": {
+                "clip_r1": {
+                    "name": "5' clip read 1",
+                    "description": "Instructs Trim Galore to remove bp from the 5' end of read 1 (or single-end reads).",
+                    "type": "number"
+                },
+                "clip_r2": {
+                    "name": "5' clip read 2",
+                    "description": "Instructs Trim Galore to remove bp from the 5' end of read 2 (paired-end reads only).",
+                    "type": "number"
+                },
+                "three_prime_clip_r1": {
+                    "name": "3' clip read 1",
+                    "description": "Instructs Trim Galore to remove bp from the 3' end of read 1 AFTER adapter/quality trimming has been performed.",
+                    "type": "number"
+                },
+                "three_prime_clip_r2": {
+                    "name": "3' clip read 2",
+                    "description": "Instructs Trim Galore to remove bp from the 3' end of read 2 AFTER adapter/quality trimming has been performed.",
+                    "type": "number"
+                },
+                "trim_nextseq": {
+                    "name": "Nextseq quality trimming",
+                    "description": "Instructs Trim Galore to apply the --nextseq=X option, to trim based on quality, but ignoring the high quality G's. Input is the threshold PHRED score for quality trimming (eg. 20). See https://cutadapt.readthedocs.io/en/stable/guide.html#nextseq-trim for more details. ",
+                    "type": "number"
+                },
+                "skip_trimming": {
+                    "name": "Skip trimming",
+                    "description": "Skip the adapter trimming step.",
+                    "type": "boolean"
+                },
+                "save_trimmed": {
+                    "name": "Save trimmed",
+                    "description": "Save the trimmed FastQ files in the results directory.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "alignment_options": {
+            "name": "Alignment Settings",
+            "description": "Settings for read alignment.",
+            "properties": {
+                "aligner": {
+                    "name": "Aligner",
+                    "description": "Specifies the alignment algorithm to use - available options are 'bwa', 'bowtie2' and 'star'.",
+                    "type": "string"
+                },
+                "keep_dups": {
+                    "name": "Keep duplicates",
+                    "description": "Duplicate reads are not filtered from alignments.",
+                    "type": "boolean"
+                },
+                "keep_multi_map": {
+                    "name": "Keep multimapping",
+                    "description": "Reads mapping to multiple locations are not filtered from alignments.",
+                    "type": "boolean"
+                },
+                "bwa_min_score": {
+                    "name": "BWA minimum score",
+                    "description": "Don't output BWA MEM alignments with score lower than this parameter.",
+                    "type": "number"
+                },
+                "save_align_intermeds": {
+                    "name": "Save intermediate BAM",
+                    "description": "Save the intermediate BAM files from the alignment step.",
+                    "type": "boolean"
+                },
+                "save_unaligned": {
+                    "name": "Save unaligned reads",
+                    "description": "Where possible, save unaligned reads from either STAR, HISAT2 or Salmon to the results directory.",
+                    "type": "boolean"
+                }
+            }
+        },
     "outputs": [
         {
             "name": "QC report",
