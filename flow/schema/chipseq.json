@@ -3,6 +3,7 @@
         "sample_options": {
             "name": "Sample options",
             "description": "Parameters relating to the sample being analysed.",
+            "advanced" : false,
             "properties": {
                 "input": {
                     "name": "Sample",
@@ -30,6 +31,7 @@
         "genome_options": {
             "name": "Genome options",
             "description": "The genome being aligned to.",
+            "advanced" : false,
             "takes_genome": true,
             "properties": {
                 "fasta": {
@@ -108,6 +110,7 @@
         "read_trimming_options": {
             "name": "Read Trimming Settings",
             "description": "Settings for read trimming.",
+            "advanced" : true,
             "properties": {
                 "clip_r1": {
                     "name": "5' clip read 1",
@@ -149,6 +152,7 @@
         "alignment_options": {
             "name": "Alignment Settings",
             "description": "Settings for read alignment.",
+            "advanced" : true,
             "properties": {
                 "aligner": {
                     "name": "Aligner",
@@ -185,6 +189,7 @@
         "peak_calling_options": {
             "name": "Peak calling Settings",
             "description": "Settings for peak calling.",
+            "advanced" : true,
             "properties": {
                 "narrow_peak": {
                     "name": "Aligner",
@@ -236,6 +241,7 @@
         "process_options": {
             "name": "Process skipping options",
             "description": "Skip certain processes in the pipeline.",
+            "advanced" : true,
             "properties": {
                 "skip_picard_metrics": {
                     "name": "Skip Picard metrics",
