@@ -3,6 +3,7 @@
         "sample_options": {
             "name": "Sample options",
             "description": "Parameters relating to the sample being analysed.",
+            "advanced" : false,
             "properties": {
                 "input": {
                     "name": "Sample",
@@ -30,6 +31,7 @@
         "genome_options": {
             "name": "Genome options",
             "description": "The genome being aligned to.",
+            "advanced" : false,
             "takes_genome": true,
             "properties": {
                 "fasta": {
@@ -104,9 +106,261 @@
                     "description": "A genome index built with STAR."
                 }
             }
-        }
-    },
-    "outputs": [
-
-    ]
+        },
+        "read_trimming_options": {
+            "name": "Read Trimming Settings",
+            "description": "Settings for read trimming.",
+            "advanced" : true,
+            "properties": {
+                "clip_r1": {
+                    "name": "5' clip read 1",
+                    "description": "Instructs Trim Galore to remove bp from the 5' end of read 1 (or single-end reads).",
+                    "type": "number"
+                },
+                "clip_r2": {
+                    "name": "5' clip read 2",
+                    "description": "Instructs Trim Galore to remove bp from the 5' end of read 2 (paired-end reads only).",
+                    "type": "number"
+                },
+                "three_prime_clip_r1": {
+                    "name": "3' clip read 1",
+                    "description": "Instructs Trim Galore to remove bp from the 3' end of read 1 AFTER adapter/quality trimming has been performed.",
+                    "type": "number"
+                },
+                "three_prime_clip_r2": {
+                    "name": "3' clip read 2",
+                    "description": "Instructs Trim Galore to remove bp from the 3' end of read 2 AFTER adapter/quality trimming has been performed.",
+                    "type": "number"
+                },
+                "trim_nextseq": {
+                    "name": "Nextseq quality trimming",
+                    "description": "Instructs Trim Galore to apply the --nextseq=X option, to trim based on quality, but ignoring the high quality G's. Input is the threshold PHRED score for quality trimming (eg. 20). See https://cutadapt.readthedocs.io/en/stable/guide.html#nextseq-trim for more details. ",
+                    "type": "number"
+                },
+                "skip_trimming": {
+                    "name": "Skip trimming",
+                    "description": "Skip the adapter trimming step.",
+                    "type": "boolean"
+                },
+                "save_trimmed": {
+                    "name": "Save trimmed",
+                    "description": "Save the trimmed FastQ files in the results directory.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "alignment_options": {
+            "name": "Alignment Settings",
+            "description": "Settings for read alignment.",
+            "advanced" : true,
+            "properties": {
+                "aligner": {
+                    "name": "Aligner",
+                    "description": "Specifies the alignment algorithm to use - available options are 'bwa', 'bowtie2' and 'star'.",
+                    "type": "string"
+                },
+                "keep_dups": {
+                    "name": "Keep duplicates",
+                    "description": "Duplicate reads are not filtered from alignments.",
+                    "type": "boolean"
+                },
+                "keep_multi_map": {
+                    "name": "Keep multimapping",
+                    "description": "Reads mapping to multiple locations are not filtered from alignments.",
+                    "type": "boolean"
+                },
+                "bwa_min_score": {
+                    "name": "BWA minimum score",
+                    "description": "Don't output BWA MEM alignments with score lower than this parameter.",
+                    "type": "number"
+                },
+                "save_align_intermeds": {
+                    "name": "Save intermediate BAM",
+                    "description": "Save the intermediate BAM files from the alignment step.",
+                    "type": "boolean"
+                },
+                "save_unaligned": {
+                    "name": "Save unaligned reads",
+                    "description": "Where possible, save unaligned reads from either STAR, HISAT2 or Salmon to the results directory.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "peak_calling_options": {
+            "name": "Peak calling Settings",
+            "description": "Settings for peak calling.",
+            "advanced" : true,
+            "properties": {
+                "narrow_peak": {
+                    "name": "Aligner",
+                    "description": "Specifies the alignment algorithm to use - available options are 'bwa', 'bowtie2' and 'star'.",
+                    "type": "string"
+                },
+                "broad_cutoff": {
+                    "name": "Keep duplicates",
+                    "description": "Duplicate reads are not filtered from alignments.",
+                    "type": "boolean"
+                },
+                "macs_fdr": {
+                    "name": "Keep multimapping",
+                    "description": "Reads mapping to multiple locations are not filtered from alignments.",
+                    "type": "boolean"
+                },
+                "macs_pvalue": {
+                    "name": "BWA minimum score",
+                    "description": "Don't output BWA MEM alignments with score lower than this parameter.",
+                    "type": "number"
+                },
+                "min_reps_consensus": {
+                    "name": "Save intermediate BAM",
+                    "description": "Save the intermediate BAM files from the alignment step.",
+                    "type": "boolean"
+                },
+                "save_macs_pileup": {
+                    "name": "Save unaligned reads",
+                    "description": "Where possible, save unaligned reads from either STAR, HISAT2 or Salmon to the results directory.",
+                    "type": "boolean"
+                },
+                "skip_peak_qc": {
+                    "name": "Skip peak QC",
+                    "description": "Skip MACS2 peak QC plot generation.",
+                    "type": "boolean"
+                },
+                "skip_peak_annotation": {
+                    "name": "Skip HOMER annotation",
+                    "description": "Skip annotation of MACS2 and consensus peaks with HOMER.",
+                    "type": "boolean"
+                },
+                "skip_consensus_peaks": {
+                    "name": "Skip consensus peaks",
+                    "description": "Skip consensus peak generation, annotation and counting.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "process_options": {
+            "name": "Process skipping options",
+            "description": "Skip certain processes in the pipeline.",
+            "advanced" : true,
+            "properties": {
+                "skip_picard_metrics": {
+                    "name": "Skip Picard metrics",
+                    "description": "Skip Picard CollectMultipleMetrics.",
+                    "type": "boolean"
+                },
+                "deseq2_vst": {
+                    "name": "DeSeq2 VST",
+                    "description": "Use vst transformation instead of rlog with DESeq2.",
+                    "type": "boolean"
+                },
+                "skip_plot_profile": {
+                    "name": "Skip plotProfile",
+                    "description": "Skip deepTools plotProfile.",
+                    "type": "boolean"
+                },
+                "skip_plot_fingerprint": {
+                    "name": "Skip plotFingerprint",
+                    "description": "Skip deepTools plotFingerprint.",
+                    "type": "boolean"
+                },
+                "skip_fastqc": {
+                    "name": "Skip FastQC",
+                    "description": "Skip FastQC.",
+                    "type": "boolean"
+                },
+                "skip_preseq": {
+                    "name": "Skip preseq",
+                    "description": "Skip Preseq.",
+                    "type": "boolean"
+                },
+                "skip_spp": {
+                    "name": "Skip Phantompeakqualtools",
+                    "description": "Skip Phantompeakqualtools.",
+                    "type": "boolean"
+                },
+                "skip_deseq2_qc": {
+                    "name": "Skip DESeq2 QC",
+                    "description": "Skip DESeq2 PCA and heatmap plotting.",
+                    "type": "boolean"
+                },
+                "skip_igv": {
+                    "name": "Skip IGV",
+                    "description": "Skip creating IGV session file.",
+                    "type": "boolean"
+                },
+                "skip_multiqc": {
+                    "name": "Skip MultiQC",
+                    "description": "Skip MultiQC.",
+                    "type": "boolean"
+                },
+                "skip_qc": {
+                    "name": "Skip QC",
+                    "description": "Skip all QC steps except for MultiQC.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "outputs": [
+            {
+                "name": "QC report",
+                "description": "MultiQC report of important quality control metrics.",
+                "filetype": "html",
+                "process": "MULTIQC"
+            },
+            {
+                "name": "Peaks QC report",
+                "description": "All samples MACS2 peak QC PDF plots.",
+                "filetype": "pdf",
+                "process": "PLOT_MACS2_QC"
+            },
+            {
+                "name": "Annotated peaks QC report",
+                "description": "All samples HOMER annotatePeaks.pl QC PDF plots.",
+                "filetype": "pdf",
+                "process": "PLOT_HOMER_ANNOTATEPEAKS"
+            },
+            {
+                "name": "Consensus peaks DeSeq2 QC report",
+                "description": "Consensus peaks DESeq2 QC PDF plots.",
+                "filetype": "pdf",
+                "process": "DESEQ2_QC"
+            },
+            {
+                "name": "Consensus peaks",
+                "description": "Consensus peaks annotated by HOMER.",
+                "filetype": "txt",
+                "process": "ANNOTATE_BOOLEAN_PEAKS"
+            },
+            {
+                "name": "Metaprofile",
+                "description": "Per-sample deepTools plotHeatmap PDF plots.",
+                "filetype": "pdf",
+                "process": "DEEPTOOLS_PLOTHEATMAP"
+            },
+            {
+                "name": "Broad peaks",
+                "description": "Per-sample MACS2 broadPeak file.",
+                "filetype": "broadPeak",
+                "process": "MACS2_CALLPEAK"
+            },
+            {
+                "name": "Broad peaks bigWig",
+                "description": "Per-sample MACS2 broadPeak bigWig file.",
+                "filetype": "broadPeak.bigWig",
+                "process": "UCSC_BEDGRAPHTOBIGWIG"
+            },
+            {
+                "name": "Narrow peaks",
+                "description": "Per-sample MACS2 narrowPeak file.",
+                "filetype": "narrowPeak",
+                "process": "MACS2_CALLPEAK"
+            },
+            {
+                "name": "Narrow peaks bigWig",
+                "description": "Per-sample MACS2 narrowPeak bigWig file.",
+                "filetype": "narrowPeak.bigWig",
+                "process": "UCSC_BEDGRAPHTOBIGWIG"
+            }
+        ]
+    }
 }
