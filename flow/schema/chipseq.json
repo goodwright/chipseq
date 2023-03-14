@@ -299,68 +299,68 @@
                     "type": "boolean"
                 }
             }
+        }
+    },
+    "outputs": [
+        {
+            "name": "QC report",
+            "description": "MultiQC report of important quality control metrics.",
+            "filetype": "html",
+            "process": "MULTIQC"
         },
-        "outputs": [
-            {
-                "name": "QC report",
-                "description": "MultiQC report of important quality control metrics.",
-                "filetype": "html",
-                "process": "MULTIQC"
-            },
-            {
-                "name": "Peaks QC report",
-                "description": "All samples MACS2 peak QC PDF plots.",
-                "filetype": "pdf",
-                "process": "PLOT_MACS2_QC"
-            },
-            {
-                "name": "Annotated peaks QC report",
-                "description": "All samples HOMER annotatePeaks.pl QC PDF plots.",
-                "filetype": "pdf",
-                "process": "PLOT_HOMER_ANNOTATEPEAKS"
-            },
-            {
-                "name": "Consensus peaks DeSeq2 QC report",
-                "description": "Consensus peaks DESeq2 QC PDF plots.",
-                "filetype": "pdf",
-                "process": "DESEQ2_QC"
-            },
-            {
-                "name": "Consensus peaks",
-                "description": "Consensus peaks annotated by HOMER.",
-                "filetype": "txt",
-                "process": "ANNOTATE_BOOLEAN_PEAKS"
-            },
-            {
-                "name": "Metaprofile",
-                "description": "Per-sample deepTools plotHeatmap PDF plots.",
-                "filetype": "pdf",
-                "process": "DEEPTOOLS_PLOTHEATMAP"
-            },
-            {
-                "name": "Broad peaks",
-                "description": "Per-sample MACS2 broadPeak file.",
-                "filetype": "broadPeak",
-                "process": "MACS2_CALLPEAK"
-            },
-            {
-                "name": "Broad peaks bigWig",
-                "description": "Per-sample MACS2 broadPeak bigWig file.",
-                "filetype": "broadPeak.bigWig",
-                "process": "UCSC_BEDGRAPHTOBIGWIG"
-            },
-            {
-                "name": "Narrow peaks",
-                "description": "Per-sample MACS2 narrowPeak file.",
-                "filetype": "narrowPeak",
-                "process": "MACS2_CALLPEAK"
-            },
-            {
-                "name": "Narrow peaks bigWig",
-                "description": "Per-sample MACS2 narrowPeak bigWig file.",
-                "filetype": "narrowPeak.bigWig",
-                "process": "UCSC_BEDGRAPHTOBIGWIG"
-            }
-        ]
-    }
+        {
+            "name": "Peaks QC report",
+            "description": "All samples MACS2 peak QC PDF plots.",
+            "filetype": "pdf",
+            "process": "PLOT_MACS2_QC"
+        },
+        {
+            "name": "Annotated peaks QC report",
+            "description": "All samples HOMER annotatePeaks.pl QC PDF plots.",
+            "filetype": "pdf",
+            "process": "PLOT_HOMER_ANNOTATEPEAKS"
+        },
+        {
+            "name": "Consensus peaks DeSeq2 QC report",
+            "description": "Consensus peaks DESeq2 QC PDF plots.",
+            "filetype": "pdf",
+            "process": "DESEQ2_QC"
+        },
+        {
+            "name": "Consensus peaks",
+            "description": "Consensus peaks annotated by HOMER.",
+            "filetype": "txt",
+            "process": "ANNOTATE_BOOLEAN_PEAKS"
+        },
+        {
+            "name": "Metaprofile",
+            "description": "Per-sample deepTools plotHeatmap PDF plots.",
+            "filetype": "pdf",
+            "process": "DEEPTOOLS_PLOTHEATMAP"
+        },
+        {
+            "name": "Broad peaks",
+            "description": "Per-sample MACS2 broadPeak file.",
+            "filetype": "broadPeak",
+            "process": "MACS2_CALLPEAK"
+        },
+        {
+            "name": "Broad peaks bigWig",
+            "description": "Per-sample MACS2 broadPeak bigWig file.",
+            "filetype": "broadPeak.bigWig",
+            "process": "UCSC_BEDGRAPHTOBIGWIG"
+        },
+        {
+            "name": "Narrow peaks",
+            "description": "Per-sample MACS2 narrowPeak file.",
+            "filetype": "narrowPeak",
+            "process": "MACS2_CALLPEAK"
+        },
+        {
+            "name": "Narrow peaks bigWig",
+            "description": "Per-sample MACS2 narrowPeak bigWig file.",
+            "filetype": "narrowPeak.bigWig",
+            "process": "UCSC_BEDGRAPHTOBIGWIG"
+        }
+    ]
 }
