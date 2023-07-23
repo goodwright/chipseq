@@ -12,11 +12,26 @@
                     "required": true,
                     "description": "The samples to process.",
                     "csv": {
-                        "sample": "name",
-                        "fastq_1": "input.1",
-                        "fastq_2": "input.2",
-                        "antibody": "name",
-                        "control": "name"
+                        "sample": {
+                            "property": "name",
+                            "user_override": false
+                        },
+                        "fastq_1": {
+                            "property": "input.1",
+                            "user_override": false
+                        },
+                        "fastq_2": {
+                            "property": "input.2",
+                            "user_override": false
+                        },
+                        "antibody": {
+                            "property": "purification_agent", 
+                            "user_override": true
+                        },
+                        "control": {
+                            "property": "",
+                            "user_override": true
+                        }
                     }
                 },
                 "read_length": {
@@ -24,6 +39,7 @@
                     "type": "number",
                     "default": "50",
                     "required": true,
+                    "valid": ["50", "75", "100", "150", "200"],
                     "description": "Read length used to calculate MACS2 genome size for peak calling."
                 }
             }
