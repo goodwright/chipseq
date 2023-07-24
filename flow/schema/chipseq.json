@@ -208,33 +208,33 @@
             "advanced" : true,
             "properties": {
                 "narrow_peak": {
-                    "name": "Aligner",
-                    "description": "Specifies the alignment algorithm to use - available options are 'bwa', 'bowtie2' and 'star'.",
-                    "type": "string"
+                    "name": "Narrow peak",
+                    "description": "Run MACS2 in narrowPeak mode.",
+                    "type": "boolean"
                 },
                 "broad_cutoff": {
-                        "name": "MACS broad peak cutoff",
+                    "name": "MACS broad peak cutoff",
                     "description": "Specifies broad cutoff value for MACS2. Only used when --narrow_peak isnt specified. Default 0.1",
                     "type": "number"
                 },
                 "macs_fdr": {
-                    "name": "Keep multimapping",
-                    "description": "Reads mapping to multiple locations are not filtered from alignments.",
-                    "type": "boolean"
+                    "name": "MACS2 minimum FDR",
+                    "description": "Minimum FDR (q-value) cutoff for peak detection, --macs_fdr and --macs_pvalue are mutually exclusive.",
+                    "type": "number"
                 },
                 "macs_pvalue": {
-                    "name": "BWA minimum score",
-                    "description": "Don't output BWA MEM alignments with score lower than this parameter.",
+                    "name": "MAC2 p-value cutoff",
+                    "description": "p-value cutoff for peak detection, --macs_fdr and --macs_pvalue are mutually exclusive. If --macs_pvalue cutoff is set, q-value will not be calculated and reported as -1 in the final .xls file.",
                     "type": "number"
                 },
                 "min_reps_consensus": {
-                    "name": "Save intermediate BAM",
-                    "description": "Save the intermediate BAM files from the alignment step.",
-                    "type": "boolean"
+                    "name": "Minimum reps consensus",
+                    "description": "Number of biological replicates required from a given condition for a peak to contribute to a consensus peak.",
+                    "type": "number"
                 },
                 "save_macs_pileup": {
-                    "name": "Save unaligned reads",
-                    "description": "Where possible, save unaligned reads from either STAR, HISAT2 or Salmon to the results directory.",
+                    "name": "Save MAC2 pileup",
+                    "description": "Instruct MACS2 to create bedGraph files normalised to signal per million reads.",
                     "type": "boolean"
                 },
                 "skip_peak_qc": {
