@@ -213,9 +213,9 @@
                     "type": "string"
                 },
                 "broad_cutoff": {
-                    "name": "Keep duplicates",
-                    "description": "Duplicate reads are not filtered from alignments.",
-                    "type": "boolean"
+                        "name": "MACS broad peak cutoff",
+                    "description": "Specifies broad cutoff value for MACS2. Only used when --narrow_peak isnt specified. Default 0.1",
+                    "type": "number"
                 },
                 "macs_fdr": {
                     "name": "Keep multimapping",
