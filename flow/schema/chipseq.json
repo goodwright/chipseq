@@ -379,5 +379,28 @@
             "filetype": "narrowPeak.bigWig",
             "process": "UCSC_BEDGRAPHTOBIGWIG"
         }
-    ]
+    ],
+    "qc": {
+        "estimated_fragment_length": {
+            "name": "Estimated fragment length",
+            "process": "MULTIQC",
+            "file": "multiqc_data/multiqc_fastqc.json",
+            "list_location": ["report_general_stats_data"],
+            "attribute": "Estimated_Fragment_Length_bp"
+        },
+        "relative_strand_cross_cross_correlation_coefficient": {
+            "name": "Relative strand cross-correlation coefficient (RSC)",
+            "process": "MULTIQC",
+            "file": "multiqc_data/multiqc_fastqc.json",
+            "list_location": ["report_general_stats_data"],
+            "attribute": "RSC"
+        },
+        "normalised_strand_cross_cross_correlation_coefficient": {
+            "name": "Normalised strand cross-correlation coefficient (NSC)",
+            "process": "MULTIQC",
+            "file": "multiqc_data/multiqc_fastqc.json",
+            "list_location": ["report_general_stats_data"],
+            "attribute": "NSC"
+        }
+    }
 }
