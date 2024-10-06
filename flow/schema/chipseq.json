@@ -1,134 +1,152 @@
 {
-    "inputs": {
-        "sample_options": {
+    "inputs": [
+        {
             "name": "Sample options",
             "description": "Parameters relating to the sample being analysed.",
             "advanced": false,
-            "properties": {
+            "params": {
                 "input": {
                     "name": "Samples",
-                    "type": "sample",
-                    "pattern": "csv|xlsx",
-                    "required": true,
-                    "categories": ["ChIP-Seq"],
                     "description": "The samples to process.",
-                    "csv": {
-                        "sample": {
-                            "property": "name",
-                            "user_override": false
+                    "required": true,
+                    "type": "csv",
+                    "takes_samples": true,
+                    "sample_types": ["ChIP-Seq"],
+                    "columns": [
+                        {
+                            "name": "sample",
+                            "type": "string",
+                            "from_sample": "name",
+                            "required": true,
+                            "render": false
                         },
-                        "fastq_1": {
-                            "property": "input.1",
-                            "user_override": false
+                        {
+                            "name": "fastq_1",
+                            "type": "data",
+                            "from_sample": 1,
+                            "required": true,
+                            "render": false
                         },
-                        "fastq_2": {
-                            "property": "input.2",
-                            "user_override": false
+                        {
+                            "name": "fastq_2",
+                            "type": "data",
+                            "from_sample": 2,
+                            "required": false,
+                            "render": false
                         },
-                        "antibody": {
-                            "property": "purification_agent", 
-                            "user_override": true
+                        {
+                            "name": "antibody",
+                            "type": "string",
+                            "from_sample": "purification_agent",
+                            "render": true
                         },
-                        "control": {
-                            "property": "",
-                            "user_override": true
+                        {
+                            "name": "control",
+                            "type": "string",
+                            "render": true
                         }
-                    }
+                    ]
                 },
                 "read_length": {
                     "name": "Read Length",
                     "type": "number",
-                    "default": "50",
+                    "default": 50,
                     "required": true,
                     "valid": ["50", "75", "100", "150", "200"],
                     "description": "Read length used to calculate MACS2 genome size for peak calling."
                 }
             }
         },
-        "genome_options": {
+        {
             "name": "Genome options",
             "description": "The genome being aligned to.",
             "advanced": false,
-            "takes_genome": true,
-            "properties": {
+            "from_execution": true,
+            "params": {
                 "fasta": {
                     "name": "FASTA",
-                    "type": "file",
-                    "pattern": "fasta|fa$",
+                    "type": "data",
+                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "required": true,
-                    "genome_file": "fasta",
+                    "execution_output": {
+                        "process": null,
+                        "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$"
+                    },
                     "description": "A raw genome FASTA file."
                 },
                 "gtf": {
                     "name": "GTF",
-                    "type": "file",
-                    "pattern": "gtf",
+                    "type": "data",
+                    "pattern": "^\\S+\\.gtf(\\.gz)?$",
                     "required": true,
-                    "genome_file": "gtf",
+                    "execution_output": {
+                        "process": null,
+                        "pattern": "^\\S+\\.gtf(\\.gz)?$"
+                    },
                     "description": "An annotation for the genome."
                 },
                 "gene_bed": {
                     "name": "BED",
-                    "type": "file",
-                    "pattern": "bed",
+                    "type": "data",
+                    "pattern": "\\.bed$",
                     "required": false,
-                    "genome_output": {
+                    "execution_output": {
                         "process": "PREPARE_GENOME_BWA:GTF2BED",
-                        "filetype": "bed"
+                        "pattern": "\\.bed$"
                     },
                     "description": "BED file containing gene intervals. This will be created from the GTF file if not specified."
                 },
                 "bwa_index": {
                     "name": "BWA Index",
-                    "type": "file",
+                    "type": "data",
                     "pattern": "",
                     "required": false,
-                    "genome_output": {
+                    "execution_output": {
                         "process": "BWA_INDEX",
-                        "filetype": ""
+                        "pattern": ""
                     },
                     "description": "A genome index built with BWA."
                 },
                 "bowtie_index": {
                     "name": "Bowtie Index",
-                    "type": "file",
+                    "type": "data",
                     "pattern": "",
                     "required": false,
-                    "genome_output": {
+                    "execution_output": {
                         "process": "BOWTIE2_BUILD",
-                        "filetype": ""
+                        "pattern": ""
                     },
                     "description": "A genome index built with Bowtie."
                 },
                 "chromap_index": {
                     "name": "Chromap Index",
-                    "type": "file",
+                    "type": "data",
                     "pattern": "",
                     "required": false,
-                    "genome_output": {
+                    "execution_output": {
                         "process": "CHROMAP_INDEX",
-                        "filetype": "index"
+                        "pattern": ""
                     },
                     "description": "A genome index built with Chromap."
                 },
                 "star_index": {
                     "name": "STAR Index",
-                    "type": "file",
+                    "type": "data",
                     "pattern": "",
                     "required": false,
-                    "genome_output": {
+                    "execution_output": {
                         "process": "STAR_GENOMEGENERATE",
-                        "filetype": ""
+                        "pattern": ""
                     },
                     "description": "A genome index built with STAR."
                 }
             }
         },
-        "read_trimming_options": {
+        {
             "name": "Read Trimming Settings",
             "description": "Settings for read trimming.",
             "advanced": true,
-            "properties": {
+            "params": {
                 "clip_r1": {
                     "name": "5' clip read 1",
                     "description": "Instructs Trim Galore to remove bp from the 5' end of read 1 (or single-end reads).",
@@ -166,11 +184,11 @@
                 }
             }
         },
-        "alignment_options": {
+        {
             "name": "Alignment Settings",
             "description": "Settings for read alignment.",
             "advanced": true,
-            "properties": {
+            "params": {
                 "aligner": {
                     "name": "Aligner",
                     "description": "Specifies the alignment algorithm to use - available options are 'bwa', 'bowtie2' and 'star'.",
@@ -203,11 +221,11 @@
                 }
             }
         },
-        "peak_calling_options": {
+        {
             "name": "Peak calling Settings",
             "description": "Settings for peak calling.",
             "advanced": true,
-            "properties": {
+            "params": {
                 "narrow_peak": {
                     "name": "Narrow peak",
                     "description": "Run MACS2 in narrowPeak mode.",
@@ -255,11 +273,11 @@
                 }
             }
         },
-        "process_options": {
+        {
             "name": "Process skipping options",
             "description": "Skip certain processes in the pipeline.",
             "advanced": true,
-            "properties": {
+            "params": {
                 "skip_picard_metrics": {
                     "name": "Skip Picard metrics",
                     "description": "Skip Picard CollectMultipleMetrics.",
@@ -317,7 +335,7 @@
                 }
             }
         }
-    },
+    ],
     "outputs": [
         {
             "name": "QC report",
@@ -364,7 +382,7 @@
         {
             "name": "Broad peaks bigWig",
             "description": "Per-sample MACS2 broadPeak bigWig file.",
-            "filetype": "broadPeak.bigWig",
+            "pattern": "broadPeak.bigWig",
             "process": "UCSC_BEDGRAPHTOBIGWIG"
         },
         {
@@ -376,7 +394,7 @@
         {
             "name": "Narrow peaks bigWig",
             "description": "Per-sample MACS2 narrowPeak bigWig file.",
-            "filetype": "narrowPeak.bigWig",
+            "pattern": "narrowPeak.bigWig",
             "process": "UCSC_BEDGRAPHTOBIGWIG"
         }
     ]
