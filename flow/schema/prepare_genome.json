@@ -1,28 +1,30 @@
 {
-    "inputs": {
-        "file_options": {
+    "inputs": [
+        {
             "name": "File options",
             "description": "Files needed to build the genome.",
-            "properties": {
+            "from_fileset": true,
+            "fileset_requires_organism": true,
+            "params": {
                 "fasta": {
                     "name": "FASTA",
-                    "type": "file",
+                    "type": "data",
                     "pattern": "fasta|fa$",
-                    "genome_file": "fasta",
+                    "fileset_pattern": "fasta|fa$",
                     "required": true,
                     "description": "A raw genome FASTA file."
                 },
                 "gtf": {
                     "name": "GTF",
-                    "type": "file",
-                    "pattern": "gtf",
-                    "genome_file": "gtf",
+                    "type": "data",
+                    "pattern": "\\.gtf$",
+                    "fileset_pattern": "\\.gtf$",
                     "required": true,
                     "description": "An annotation for the genome."
                 }
             }
         }
-    },
+    ],
     "outputs": [
         {
             "name": "Gene BED annotation",
